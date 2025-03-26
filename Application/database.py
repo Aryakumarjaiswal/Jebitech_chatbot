@@ -15,13 +15,13 @@ load_dotenv()
 
 
 
-DB_PASSWORD= os.getenv("DB_PASSWORD")  #quote_plus("#1Krishna")
-USERNAME=os.getenv("USERNAME")
-HOST=os.getenv("HOST")
-PORT=os.getenv("PORT")
-DB=os.getenv("DB")
+DB_PASSWORD= os.getenv("our_password")  #quote_plus("#1Krishna")
+USERNAME=os.getenv("our_user")
+HOST=os.getenv("our_host")
+PORT=int(os.getenv("our_port"))
+DB=os.getenv("our_database")
 
-DATABASE_URL = f"mysql+pymysql://root:#1Krishna@localhost:3306/chatbot_db"
+DATABASE_URL = f"mysql+pymysql://{USERNAME}:{DB_PASSWORD}@{HOST}:{PORT}/{DB}"
 
 
 engine = create_engine(DATABASE_URL)
