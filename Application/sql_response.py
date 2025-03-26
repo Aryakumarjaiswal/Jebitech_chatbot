@@ -6,6 +6,14 @@ import pymysql
 import os
 import re
 from Application.endpoints.prompt_generator import guest_prompt
+load_dotenv()
+
+our_host=os.getenv("our_host")
+our_user=os.getenv("our_user")
+our_password=os.getenv("our_password")
+our_database=os.getenv("our_database")
+
+
 def clean_user_input(user_input):
     """Extracts potential property names from user input using regex."""
     words = re.findall(r"[A-Za-z\s\-]+", user_input) 
@@ -17,12 +25,12 @@ def execute_sql(sql_query):
     try:
         cleaned_query = clean_sql_query(sql_query)
    
-
+        
         conn = pymysql.connect(
-    host="localhost",
-    user="root",  
-    password="#1Krishna",  
-    database="chatbot_db"  
+    host=our_host,
+    user=our_user,  
+    password=our_password,  
+    database=our_database  
 )       
         cursor = conn.cursor()
         cursor.execute(cleaned_query)
@@ -44,10 +52,10 @@ def get_property_names():
     property_names = []
     try:
         connection = pymysql.connect(
-    host="localhost",
-    user="root",  
-    password="#1Krishna",  
-    database="chatbot_db"  
+    host=our_host,
+    user=our_user,  
+    password=our_password,  
+    database=our_database  
 )       
         cursor = connection.cursor()
 
@@ -125,7 +133,7 @@ def final_answer(new_input):
     "response_mime_type": "text/plain",
 }
     model2 = genai.GenerativeModel(
-    model_name= "gemini-2.0-flash",   #"gemini-1.5-flash",
+    model_name= "gemini-2.0-flash",
     generation_config=generation_config,
     system_instruction=guest_prompt,
   
