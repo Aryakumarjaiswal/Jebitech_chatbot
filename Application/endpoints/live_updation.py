@@ -7,6 +7,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+our_host=os.getenv("our_host")
+our_user=os.getenv("our_user")
+our_password=os.getenv("our_password")
+our_database=os.getenv("our_database")
+our_port=int(os.getenv("our_port"))
 COLUMN_MAPPING={
 
  "GUESTY_LISTINGS": {
@@ -176,11 +182,11 @@ LOG_FILE = "sync_log.txt"
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO, format="%(asctime)s - %(message)s")
 try:
     CLIENT_DB_CONFIG = {
-    "host":"db-mysql-sfo3-49744-do-user-15692128-0.c.db.ondigitalocean.com",
-   "user":"neovis_ai_user",
-   "password":"t@ngrino1",
-    "database":"guesty_db",
-    "port":25060,
+    "host":os.getenv("client_host"),
+   "user":os.getenv("client_user"),
+   "password":os.getenv("client_password"),
+    "database":os.getenv("client_database"),
+    "port":int(os.getenv("client_port")),
   
     } 
     print("Connection made to client DB successfully!")
@@ -190,11 +196,11 @@ except Exception as e:
 
 try:
     YOUR_DB_CONFIG = {
-    "host":"localhost",
-    "user":"root",
-    "password":"#1Krishna",
-    "database":"chatbot_db",
-    "port":3306,
+    "host":our_host,
+    "user":our_user,
+    "password":our_password,
+    "database":our_database,
+    "port":our_port,
 
     }
     print("Connection made to my DB successfully!")
@@ -301,8 +307,7 @@ def sync_data():
         print(f"Error syncing data: {e}")
 
 
-#while True:
-
-sync_data()
-#    time.sleep(7200)
+while True:
+    sync_data()
+    time.sleep(7200)
 
