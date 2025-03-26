@@ -1,9 +1,17 @@
 import pymysql
+from dotenv import load_dotenv
+import os
+load_dotenv()
+host=os.getenv("client_host")
+user=os.getenv("client_user")
+password=os.getenv("client_password")
+database=os.getenv("client_database")
+port=int(os.getenv("client_port"))
 
 db_configs = [
-    {"host": "db-mysql-sfo3-49744-do-user-15692128-0.c.db.ondigitalocean.com","port":25060,"user":"neovis_ai_user", "password": "t@ngrino1", "database": "guesty_db", "table": "BREEZEAWAY_RESERVATIONS"},
-    {"host": "db-mysql-sfo3-49744-do-user-15692128-0.c.db.ondigitalocean.com","port":25060,"user":"neovis_ai_user", "password": "t@ngrino1", "database": "guesty_db", "table": "GUESTY_RESERVATIONS_FULL"},
-    {"host": "db-mysql-sfo3-49744-do-user-15692128-0.c.db.ondigitalocean.com", "port":25060,"user": "neovis_ai_user", "password": "t@ngrino1", "database": "guesty_db", "table": "GUESTY_RESERVATIONS" }#"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}
+    {"host": host,"port":port,"user":user, "password":password, "database":database, "table": "BREEZEAWAY_RESERVATIONS"},
+    {"host": host,"port":port,"user":user, "password":password , "database": database, "table": "GUESTY_RESERVATIONS_FULL"},
+    {"host": host, "port":port,"user": user, "password":password, "database": database, "table": "GUESTY_RESERVATIONS" }#"ssl": {"ca": "/etc/ssl/certs/ca-certificates.crt"}
 ]
 
 
