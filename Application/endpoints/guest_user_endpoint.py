@@ -156,12 +156,14 @@ def chat_with_bot( user_input: str, db: Session = Depends(get_db)):
                     
                     
                     db.add(first_chat)
+                else :
+                    record_search.message = str((record_search.message or "") + message_container)
+                    record_search.sent_at = datetime.utcnow()
                     
                 if user.started_at:
                     user.Duration = (user.ended_at - user.started_at).total_seconds() 
                 
-                    record_search.message = str((record_search.message or "") + message_container)
-                    record_search.sent_at = datetime.utcnow()
+                    
 
             
                 db.commit()
